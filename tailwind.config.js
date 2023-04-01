@@ -3,6 +3,9 @@ module.exports = {
   content: [
     "./pages/index.jsx",
     "./components/header.jsx",
+    "./components/banner.jsx",
+    "./components/productfeed.jsx",
+    "./components/product.jsx",
   ],
   darkMode : false,
   theme: {
@@ -21,6 +24,8 @@ module.exports = {
     extends : {},
   },
   
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ],
 }
 
