@@ -1,58 +1,52 @@
-import Image from "next/image";
-import React from "react";
-import {
-  AiOutlineSearch,
-  AiOutlineShoppingCart,
-  AiOutlineMenu,
-} from "react-icons/ai";
+import Image from 'next/image'
+import {useRouter} from 'next/router'
+import {AiOutlineSearch, AiOutlineMenu, AiOutlineShoppingCart} from 'react-icons/ai'
+import { useSession, signIn, signOut } from "next-auth/react"
+import {useRecoilValue} from 'recoil'
+import { productState } from '@/app/state'
 
 export default function Header() {
+    const router = useRouter()
+    const {data:session} = useSession()
+    const productValue = useRecoilValue(productState)
+   const signOutHandler = () => {
+        signOut({redirect : false})
+   }
+   console.log(productValue)
   return (
-    <header>
-      <div>
-        <div className="flex items-center bg-amazon_blue-default flex-grow py-2 p-1">
-          <div className="mt-2 mx-1 sm:mx-6 flex items-center flex-grow sm:flex-grow-0">
-            <Image
-              src="https://links.papareact.com/f90"
-              width={150}
-              height={40}
-              alt="logo"
-              objectFit="contain"
-            />
-          </div>
-          <div className="flex-grow hidden sm:flex items-center bg-yellow-400 hover:bg-yellow-500 cursor-pointer h-10 rounded-md">
-            <input
-              type="text"
-              className="h-full flex-grow flex-shrink focus:outline-none rounded-l-md w-6 p-2 px-4"
-            />
-            <AiOutlineSearch className="text-3xl text-white" />
-          </div>
-          <div className=" flex items-center space-x-6 mx-6 text-xs text-white whitespace-nowrap">
-            <div className="link">
-              <p>Hello Shahhajal Khan</p>
-              <p className=" font-extrabold md:text-sm">Account & List</p>
+    <div>
+        <div className=" bg-amazon_blue-default py-2 p-1 flex items-center flex-grow">
+            <div className="mt-2 flex-grow sm:flex-grow-0 mx-1 md:mx-6">
+                <Image onClick={() => router.push("/") } src="https://links.papareact.com/f90" width={150} height={50} alt='amazon' objectFit='contain' className=" cursor-pointer" />
             </div>
-            <div className="link">
-              <p className=" font-extrabold md:text-sm">Returns</p>
-              <p className=" font-extrabold md:text-sm">& Orders</p>
+            <div className=" hidden flex-grow sm:flex bg-yellow-400 flex-shrink rounded-md h-10 cursor-pointer hover:bg-yellow-500">
+                <input type="text" className="h-full flex-grow w-10 focus:outline-none rounded-l-md p-2 px4" />
+                <div className="flex justify-center items-center">
+                <AiOutlineSearch className="text-3xl text-white" />
+                </div>
             </div>
-            <div className="flex items-center relative link ">
-              <span className=" absolute -right-1 md:right-8 -top-2 text-black flex items-center justify-center bg-yellow-400 rounded-full w-5 h-5 text-center">
-                0
-              </span>
-              <AiOutlineShoppingCart className="text-4xl" />
-              <p className=" font-extrabold md:text-sm mt-2 hidden md:inline">
-                Basket
-              </p>
+            <div className="text-white flex items-center whitespace-nowrap text-xs space-x-6 mx-6">
+                <div className="link" onClick={!session ? signIn : signOutHandler}>
+                    <p>{session?`Hello ${session.user.name}` : "Sign in"}</p>
+                    <p className="md:text-sm font-extrabold">Account & List</p>
+                </div>
+                <div className="link flex flex-col -space-y-1">
+                    <p className="md:text-sm font-extrabold">Returns</p>
+                    <p className="md:text-sm font-extrabold">& Orders</p>
+                </div>
+                <div className=" flex items-center relative link" onClick={() => router.push("/checkout")}>
+                    <span className="absolute -top-1 right-0 md:right-10 h-5 w-5 rounded-full bg-yellow-400 flex items-center justify-center font-semibold text-xs text-black">{productValue.length}</span>
+                    <AiOutlineShoppingCart className="text-4xl" />
+                    <p className="font-extrabold md:text-sm hidden md:inline mt-2">Basket</p>
+                </div>
             </div>
-          </div>
         </div>
-        <div className="flex pl-6 py-2 text-sm items-center space-x-3 flex-row bg-amazon_blue-light text-white">
-          <p className="flex items-center space-x-2 link">
-            <AiOutlineMenu className="text-2xl" />
+        <div className="bg-amazon_blue-light flex items-center space-x-3 whitespace-nowrap flex-grow pl-6 p-2 text-sm text-white">
+           <p className="link flex items-center space-x-1">
+            <AiOutlineMenu />
             <span>All</span>
-          </p>
-          <p className="link">Prime Video</p>
+           </p>
+           <p className="link">Prime Video</p>
           <p className="link">Amazon Business</p>
           <p className="link">Today's Deals</p>
           <p className="link hidden lg:inline-flex">Electronics</p>
@@ -62,7 +56,6 @@ export default function Header() {
           <p className="link hidden lg:inline-flex">Shopper Toolkit</p>
           <p className="link hidden lg:inline-flex">Health & Personal Care</p>
         </div>
-      </div>
-    </header>
-  );
+    </div>
+  )
 }

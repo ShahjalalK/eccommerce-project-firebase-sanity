@@ -2,10 +2,13 @@
 module.exports = {
   content: [
     "./pages/index.jsx",
+    "./pages/checkout.jsx",
+    "./pages/recoil.jsx",
     "./components/header.jsx",
     "./components/banner.jsx",
     "./components/productfeed.jsx",
     "./components/product.jsx",
+    "./components/checkoutporduct.jsx",
   ],
   darkMode : false,
   theme: {
