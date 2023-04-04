@@ -53,7 +53,7 @@ export default function Product({
         {Array(rating)
           .fill()
           .map((_, i) => (
-            <AiFillStar className="text-xl" />
+            <AiFillStar className="text-xl" key={i} />
           ))}
       </div>
       <p className="line-clamp-2 my-2 text-xs">{description}</p>

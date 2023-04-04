@@ -1,5 +1,6 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel'
+import Image from "next/image";
 
 export default function Banner() {
   return (
@@ -14,13 +15,13 @@ export default function Banner() {
         showThumbs={false}
         >
                 <div>
-                    <img src="https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71tIrZqybrL._SX3000_.jpg" alt="banner" />
+                    <Image src="https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/71tIrZqybrL._SX3000_.jpg" alt="banner" objectFit="contain" width={1366} height={768} />
                 </div>
                 <div>
-                    <img src="https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/61TD5JLGhIL._SX3000_.jpg" alt="banner" />
+                    <Image src="https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/61TD5JLGhIL._SX3000_.jpg" alt="banner" objectFit="contain" width={1366} height={768} />
                 </div>
                 <div>
-                    <img src="https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/61jovjd+f9L._SX3000_.jpg" alt="banner" />
+                    <Image src="https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/61jovjd+f9L._SX3000_.jpg" alt="banner" objectFit="contain" width={1366} height={768} />
                 </div>
                 
                

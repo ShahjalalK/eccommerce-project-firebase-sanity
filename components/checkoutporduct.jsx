@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { AiFillStar } from "react-icons/ai";
 import Currency from "react-currency-formatter";
-import { productState, useProductState } from "../app/state";
+import {useProductState } from "../app/state";
 
 export default function CheckoutProduct({
   id,
@@ -31,7 +31,7 @@ export default function CheckoutProduct({
           {Array(rating)
             .fill()
             .map((_, i) => (
-              <AiFillStar />
+              <AiFillStar key={i} />
             ))}
         </div>
         <p className="text-xs my-2 line-clamp-2">{description}</p>
